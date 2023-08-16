@@ -1,0 +1,47 @@
+{
+  "name": "basic-dom-helper",
+  "version": "1.0.1",
+  "description": "Basic DOM helper - A lightwight DOM helper.",
+  "main": "dist/basic-dom-helper.js",
+  "types": "dist/src/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergiolindau/basic-dom-helper.git"
+  },
+  "keywords": [
+    "DOM",
+    "Document Object Model",
+    "navigator",
+    "browser",
+    "helper"
+  ],
+  "author": "Sergio Lindau <sergiolindau@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sergiolindau/basic-dom-helper/issues"
+  },
+  "homepage": "https://github.com/sergiolindau/basic-dom-helper#readme",
+  "scripts": {
+    "git:add:all": "git add .",
+    "git:commit:initial": "git commit -m \"Initial Commit\"",
+    "git:push": "git push",
+    "git:add:commit:push": "npm run git:add:all && npm run git:commit:initial && npm run git:push",
+    "update": "npx ncu -u",
+    "tscbuild": "tsc -p tsconfig.build.json",
+    "build": "webpack --mode production",
+    "clean": "rimraf dist",
+    "publish-basic-dom-helper": "npm publish --access public"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.0",
+    "@types/webpack": "^5.28.1",
+    "rimraf": "^5.0.1",
+    "ts-loader": "^9.4.4",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}
