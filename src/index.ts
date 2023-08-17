@@ -1,5 +1,5 @@
 // DOM Helper static class
-export abstract class BasicDomHelper {
+export default abstract class {
     public static i(id: string): HTMLElement | null {
         return document.getElementById(id);
     }

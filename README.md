@@ -32,7 +32,7 @@ const $ = require('basic-dom-helper');
 For typescript usage:
 
 ```typescript
-import { BasicDomHelper as $ } from 'basic-dom-helper';
+import $ from 'basic-dom-helper';
 ```
 
 # License
