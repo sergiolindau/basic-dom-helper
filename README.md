@@ -2,7 +2,7 @@
 
 >Basic DOM helper - A lightweight DOM helper.
 
-This package provides methods to manage programatically DOM objects.
+This package provides methods to manipulate programatically DOM objects.
 
 ## Installation
 
@@ -20,7 +20,7 @@ npm install --save-dev @type/basic-dom-helper
 
 ## Usage
 
-The API is a static class with methods for DOM manipulation.
+The API is an abstract class with static methods for DOM manipulation.
 
 For javascript usage:
 
@@ -28,11 +28,19 @@ For javascript usage:
 const $ = require('basic-dom-helper');
 ```
 
-
 For typescript usage:
 
 ```typescript
 import $ from 'basic-dom-helper';
+```
+
+## Examples
+
+The example above show how to create a div element appending as child of
+`content` with id `'id-div-01'`:
+
+```typescript
+const div = $.create('div', content, 'id-div-01');
 ```
 
 # License

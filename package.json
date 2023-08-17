@@ -1,6 +1,6 @@
 {
   "name": "basic-dom-helper",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Basic DOM helper - A lightwight DOM helper.",
   "main": "dist/basic-dom-helper.js",
   "types": "dist/src/index.d.ts",
