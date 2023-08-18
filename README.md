@@ -9,18 +9,20 @@ This package provides methods to manipulate programatically DOM objects.
 Install the `basic-dom-helper` package:
 
 ```bash
-npm install basic-dom-helper
+npm i basic-dom-helper
 ```
 
-For typescript usage install `@types/basic-dom-helper` package:
+For typescript usage install `@types/basic-dom-helper` package as development dependency:
 
 ```bash
-npm install --save-dev @type/basic-dom-helper
+npm i --save @type/basic-dom-helper
 ```
 
 ## Usage
 
-The API is an abstract class with static methods for DOM manipulation.
+The API is an abstract class with static methods for DOM manipulation. The
+methods uses multiple arguments merging common javascript commands for DOM
+manipulation.
 
 For javascript usage:
 
@@ -37,11 +39,38 @@ import $ from 'basic-dom-helper';
 ## Examples
 
 The example above show how to create a div element appending as child of
-`content` with id `'id-div-01'`:
+`content` with id `'div-id'`:
 
 ```typescript
-const div = $.create('div', content, 'id-div-01');
+const div = $.create('div', content, 'div-id');
 ```
+
+The `create` method as shown in the previous example is equivalent to running
+the following three javascript commands:
+
+```javascript
+const div = document.createElement('div');
+content.append(div);
+div.setAttribute('id', 'div-id');
+```
+
+If the `create` method is used in its complete call, it can assign the created
+tag to a parent referred to by id, also assigning the class and name.
+
+```typescript
+const div = $.create('div', 'content-id', 'div-id', 'div-style-class', 'div-name');
+```
+
+Being equivalent to:
+
+```javascript
+const div = document.createElement('div');
+content.append(div);
+div.setAttribute('id', 'div-id');
+div.setAttribute('class', 'div-style-class');
+div.setAttribute('name', 'div-name');
+```
+
 
 # License
 
