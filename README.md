@@ -12,12 +12,6 @@ Install the `basic-dom-helper` package:
 npm i basic-dom-helper
 ```
 
-For typescript usage install `@types/basic-dom-helper` package as development dependency:
-
-```bash
-npm i --save @type/basic-dom-helper
-```
-
 ## Usage
 
 The API is an abstract class with static methods for DOM manipulation. The
