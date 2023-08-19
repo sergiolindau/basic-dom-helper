@@ -1,4 +1,4 @@
-# basic-dom-helper
+# Basic DOM helper
 
 >Basic DOM helper - A lightweight DOM helper.
 
@@ -65,7 +65,7 @@ Being equivalent to:
 
 ```javascript
 const div = document.createElement('div');
-content.append(div);
+document.getElementById('content-id').append(div);
 div.setAttribute('id', 'div-id');
 div.setAttribute('class', 'div-style-class');
 div.setAttribute('name', 'div-name');
