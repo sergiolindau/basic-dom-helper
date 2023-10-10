@@ -101,7 +101,7 @@ export default abstract class {
     return result;
   }
   public static fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
-    if (!(window as any).fetch) {
+    if ((window as any).fetch) {
       return fetch(input, init);
     } else {
       return new Promise((resolve: (value: Response | PromiseLike<Response>) => void) => {
