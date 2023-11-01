@@ -2,7 +2,10 @@
 
 >Basic DOM helper - A lightweight DOM helper.
 
-This package provides methods to manipulate programatically DOM objects.
+This package provides methods for manipulating DOM objects programmatically.
+The methods condense sequences of commands common in DOM manipulation (such as
+creating then append elements). This makes the code that uses this package
+more readable, focusing on business rules.
 
 ## Installation
 
