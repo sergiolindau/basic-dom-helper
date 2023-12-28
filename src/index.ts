@@ -14,7 +14,8 @@ export type Tfetch = (input: RequestInfo | URL, init?: RequestInit) => Promise<R
  * [MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLScriptElement)
  */
 export interface LoadScriptOptions {
-    src: string;
+    src?: string;
+    text?: string;
     async?: boolean;
     crossOrigin?: string | null;
     defer?: boolean;
@@ -29,7 +30,7 @@ export interface LoadScriptOptions {
  * [MDN Reference](https://developer.mozilla.org/docs/Web/API/HTMLLinkElement)
  */
 export interface LoadLinkOptions {
-    href: string;
+    href?: string;
     as?: string;
     crossOrigin?: string | null;
     disabled?: boolean;
@@ -51,35 +52,35 @@ export interface LoadLinkOptions {
 export default abstract class BasicDOMHelper {
     /**
      * Get element by id.
-     * @param id element id
+     * @param elementId element id
      * @returns element
      */
-    public static i(id: string): HTMLElement | null {
-        return document.getElementById(id);
+    public static i(elementId: string): HTMLElement | null {
+        return document.getElementById(elementId);
     }
     /**
      * Get elements by name.
-     * @param name elements name
+     * @param elementName elements name
      * @returns elements node list
      */
-    public static n(name: string): NodeListOf<HTMLElement> | null {
-        return document.getElementsByName(name);
+    public static n(elementName: string): NodeListOf<HTMLElement> | null {
+        return document.getElementsByName(elementName);
     }
     /**
      * Get elements by class.
-     * @param cls class name
+     * @param classNames class name
      * @returns elements collection
      */
-    public static c(cls: string): HTMLCollectionOf<Element> | null {
-        return document.getElementsByClassName(cls);
+    public static c(classNames: string): HTMLCollectionOf<Element> | null {
+        return document.getElementsByClassName(classNames);
     }
     /**
      * Get elements by tag.
-     * @param cls tag
+     * @param qualifiedName name
      * @returns elements collection
      */
-    public static t(tag: string): HTMLCollectionOf<Element> | null {
-        return document.getElementsByTagName(tag);
+    public static t(qualifiedName: string): HTMLCollectionOf<Element> | null {
+        return document.getElementsByTagName(qualifiedName);
     }
     /**
      * Creates a DOM object and optionally appends to a parent element, assign
@@ -98,8 +99,9 @@ export default abstract class BasicDOMHelper {
         c?: string | null,
         n?: string | null,
     ): HTMLElementTagNameMap[K] {
-        if (arguments.length == 1) return document.createElement(tag);
-        else {
+        if (arguments.length == 1) {
+            return document.createElement(tag);
+        } else {
             const result = document.createElement(tag);
             if (parent) {
                 if (typeof parent == 'string') {
@@ -170,14 +172,7 @@ export default abstract class BasicDOMHelper {
             });
         }
     }
-    /**
-     * ### References
-     * * https://www.ietf.org/rfc/rfc4122.txt
-     * @returns
-     */
-    public static uid(): string {
-        return Date.now().toString(36) + Math.random().toString(36).substring(2);
-    }
+
     public static createStyle(innerHTML?: string): HTMLStyleElement {
         const newStyle: HTMLStyleElement = document.createElement('style');
         document.head.appendChild(newStyle);
@@ -261,8 +256,7 @@ export default abstract class BasicDOMHelper {
     private static loadURIError(event: Event | string, source?: string, lineno?: number, colno?: number, error?: Error): void {
         if (typeof event !== 'string') {
             throw new URIError(`The file ${event.target} didn't load correctly${error ? ` ${error.message}.` : '.'}`);
-        }
-        else {
+        } else {
             throw new URIError(event);
         }
     }
@@ -275,15 +269,14 @@ export default abstract class BasicDOMHelper {
     private static setScriptOptions(script: HTMLScriptElement, options: LoadScriptOptions): void {
         if (options.type !== undefined) {
             script.type = options.type;
-        }
-        else {
+        } else {
             script.type = 'text/javascript';
         }
         if (options.src) {
             script.src = options.src;
         }
-        else {
-            throw new Error('src must be specified');
+        if (options.text) {
+            script.text = options.text;
         }
         if (options.async !== undefined) {
             if (options.async) {
@@ -324,15 +317,11 @@ export default abstract class BasicDOMHelper {
     private static setLinkOptions(link: HTMLLinkElement, options: LoadLinkOptions): void {
         if (options.type !== undefined) {
             link.type = options.type;
-        }
-        else {
+        } else {
             link.type = 'text/css';
         }
         if (options.href) {
             link.href = options.href;
-        }
-        else {
-            throw new Error('href must be specified');
         }
         if (options.as !== undefined) {
             link.as = options.as;
@@ -357,8 +346,7 @@ export default abstract class BasicDOMHelper {
         }
         if (options.media !== undefined) {
             link.media = options.media;
-        }
-        else {
+        } else {
             link.media = 'all';
         }
         if (options.referrerPolicy !== undefined) {
@@ -366,8 +354,7 @@ export default abstract class BasicDOMHelper {
         }
         if (options.rel !== undefined) {
             link.rel = options.rel;
-        }
-        else {
+        } else {
             link.rel = 'stylesheet';
         }
     }
@@ -400,8 +387,7 @@ export default abstract class BasicDOMHelper {
         script.onerror = onerror ? onerror : BasicDOMHelper.loadURIError;
         if (typeof options !== 'string') {
             BasicDOMHelper.setScriptOptions(script, options);
-        }
-        else {
+        } else {
             BasicDOMHelper.setScriptOptions(script, { src: options });
         }
         if (append) {
@@ -416,8 +402,7 @@ export default abstract class BasicDOMHelper {
                 const script: HTMLScriptElement = document.createElement('script');
                 if (typeof options !== 'string') {
                     BasicDOMHelper.setScriptOptions(script, options);
-                }
-                else {
+                } else {
                     BasicDOMHelper.setScriptOptions(script, { src: options });
                 }
                 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
@@ -450,8 +435,7 @@ export default abstract class BasicDOMHelper {
         link.onerror = onerror ? onerror : BasicDOMHelper.loadURIError;
         if (typeof options !== 'string') {
             BasicDOMHelper.setLinkOptions(link, options);
-        }
-        else {
+        } else {
             BasicDOMHelper.setLinkOptions(link, { href: options });
         }
         if (append) {

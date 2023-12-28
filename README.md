@@ -17,9 +17,9 @@ npm i basic-dom-helper
 
 ## Usage
 
-The API is an abstract class with static methods for DOM manipulation. The
+This API is an abstract class with static methods for DOM manipulation. The
 methods uses multiple arguments merging common javascript commands for DOM
-manipulation.
+manipulation with low overheading comparing with inline commands.
 
 For javascript usage:
 
@@ -36,13 +36,15 @@ import $ from 'basic-dom-helper';
 ## Examples
 
 The example above show how to create a div element appending as child of
-`content` with id `'div-id'`:
+`parent` with id `'div-id'`:
 
 ```typescript
-const div = $.create('div', content, 'div-id');
+const div = $.create('div', parent, 'div-id');
 ```
 
-The `create` method as shown in the previous example is equivalent to running
+The `parent` parameter can be a DOM element or id string of element.
+
+The `create` method as shown in the previous example is equivalent to run
 the following three javascript commands:
 
 ```javascript
@@ -52,17 +54,17 @@ div.setAttribute('id', 'div-id');
 ```
 
 If the `create` method is used in its complete call, it can assign the created
-tag to a parent referred to by id, also assigning the class and name.
+tag to a parent referred to by id, also assigning the style class and element name.
 
 ```typescript
-const div = $.create('div', 'content-id', 'div-id', 'div-style-class', 'div-name');
+const div = $.create('div', 'parent-id', 'div-id', 'div-style-class', 'div-name');
 ```
 
 Being equivalent to:
 
 ```javascript
 const div = document.createElement('div');
-document.getElementById('content-id').append(div);
+document.getElementById('parent-id').append(div);
 div.setAttribute('id', 'div-id');
 div.setAttribute('class', 'div-style-class');
 div.setAttribute('name', 'div-name');
@@ -73,7 +75,7 @@ div.setAttribute('name', 'div-name');
 
 >MIT License
 >
->Copyright &copy; 2016-2023 Sergio Lindau
+>Copyright &copy; 2016-2024 Sergio Lindau
 >
 >Permission is hereby granted, free of charge, to any person obtaining a copy
 >of this software and associated documentation files (the "Software"), to deal
